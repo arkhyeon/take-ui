@@ -2,14 +2,18 @@ import React, { PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/css';
 
-type ButtonProps = {
+export type ButtonProps = {
   children?: React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
   size?: 'lg' | 'md' | 'sm';
 };
 
 const SIZES = {
-  sm: '--button-font-size: 0.875rem;--button-padding: 8px 12px;--button-radius: 4px;',
+  sm: css`
+    --button-font-size: 0.875rem;
+    --button-padding: 8px 12px;
+    --button-radius: 4px;
+  `,
   md: css`
     --button-font-size: 1rem;
     --button-padding: 12px 16px;
@@ -23,8 +27,6 @@ const SIZES = {
 };
 
 const TakeButton = styled.button`
-  ${(p) => p.sizeStyle};
-
   border: none;
   cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif;
@@ -49,9 +51,8 @@ const TakeButton = styled.button`
 
 function Button({ children, type, size = 'sm' }: ButtonProps) {
   const sizeStyle: string = SIZES[size];
-  console.log(sizeStyle);
   return (
-    <TakeButton type={type} sizeStyle={sizeStyle} className={sizeStyle}>
+    <TakeButton type={type} className={sizeStyle}>
       {children}
     </TakeButton>
   );
